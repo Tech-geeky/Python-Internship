@@ -8,7 +8,6 @@ def button_click(number):
 def button_clear():
     entry.delete(0, tk.END)
 
-
 def button_equal():
     try:
         result = eval(entry.get())
@@ -18,14 +17,11 @@ def button_equal():
         entry.delete(0, tk.END)
         entry.insert(0, "Error")
 
-
 root = tk.Tk()
-root.title("Simple Calculator by Sachin ")
+root.title("Simple Calculator")
 
-
-entry = tk.Entry(root, width=16, font=('Arial', 24), bd=5, justify='right')
+entry = tk.Entry(root, width=16, font=('Arial', 24), bd=5, justify='right', fg='blue', bg='lightgray')
 entry.grid(row=0, column=0, columnspan=4)
-
 
 buttons = [
     '7', '8', '9', '/',
@@ -38,13 +34,20 @@ row_val = 1
 col_val = 0
 
 for button in buttons:
-    tk.Button(root, text=button, padx=20, pady=20, font=('Arial', 18), command=lambda button=button: button_click(button)).grid(row=row_val, column=col_val)
+    button_element = tk.Button(root, text=button, padx=20, pady=20, font=('Arial', 18), command=lambda button=button: button_click(button), fg='white', bg='gray')
+    button_element.grid(row=row_val, column=col_val)
     col_val += 1
     if col_val > 3:
         col_val = 0
         row_val += 1
 
-tk.Button(root, text='C', padx=20, pady=20, font=('Arial', 18), command=button_clear).grid(row=5, column=0)
-tk.Button(root, text='=', padx=20, pady=20, font=('Arial', 18), command=button_equal).grid(row=5, column=1, columnspan=3)
+# Customize the style of the "C" and "=" buttons
+clear_button = tk.Button(root, text='C', padx=20, pady=20, font=('Arial', 18), command=button_clear, fg='white', bg='red')
+clear_button.grid(row=5, column=0)
+equal_button = tk.Button(root, text='=', padx=20, pady=20, font=('Arial', 18), command=button_equal, fg='white', bg='green')
+equal_button.grid(row=5, column=1, columnspan=3)
+
+# Change the background color of the entire calculator
+root.configure(bg='lightblue')
 
 root.mainloop()
